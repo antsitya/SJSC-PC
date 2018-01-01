@@ -1,0 +1,43 @@
+@charset "UTF-8";
+html{overflow-y:hidden;}
+body{margin:0;height:100%;}
+a:active,a:hover{outline:0}
+button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+input,select,button{outline:none;}
+td,th{padding:0}
+html{font-size:50px;-webkit-tap-highlight-color:transparent;height:100%;min-width:320px;overflow-x:hidden}
+body{font-family:"Microsoft YaHei";font-size:.28em;line-height:1;color:#333;background-color:white;}
+button,input,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit}
+a{color:#06c1ae;text-decoration:none;outline:0}
+a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
+p{line-height:1.41;text-align:justify;margin:-.2em 0;word-break:break-all}
+.admin_login{width:300px;height:auto;overflow:hidden;margin:10% auto 0 auto;padding:40px;box-shadow:0 -15px 30px #282828;border-radius:5px;}
+.admin_login dt{font-size:20px;font-weight:bold;text-align:center;color:#fff;text-shadow:0 0 1px #0e947a;margin-bottom:15px;}
+.admin_login dt strong{display:block;}
+.admin_login dt em{display:block;font-size:12px;margin-top:8px;}
+.admin_login dd{margin:5px 0;height:42px;overflow:hidden;position:relative;}
+.admin_login dd .login_txtbx{font-size:14px;height:26px;line-height:26px;padding:8px 5%;width:100%;text-indent:2em;border:none;background:rgba(129, 148, 148, 0.27);color:white;}
+.admin_login dd .login_code{font-size:14px;height:26px;line-height:26px;padding:8px 5%;width:45%;text-indent:2em;border:none;background:rgba(129, 148, 148, 0.27);color:white;}
+.admin_login dd .login_txtbx::-webkit-input-placeholder {color:#f4f4f4;line-height:inherit;} 
+.admin_login dd .login_txtbx:-moz-placeholder {color:#f4f4f4;line-height:inherit;} 
+.admin_login dd .login_txtbx::-moz-placeholder {color:#f4f4f4;line-height:inherit;}
+.admin_login dd .login_txtbx:focus{background:rgba(129, 148, 148, 0.27);}
+.admin_login dd .login_code::-webkit-input-placeholder {color:#f4f4f4;line-height:inherit;} 
+.admin_login dd .login_code:-moz-placeholder {color:#f4f4f4;line-height:inherit;} 
+.admin_login dd .login_code::-moz-placeholder {color:#f4f4f4;line-height:inherit;}
+.admin_login dd .login_code:focus{background:rgba(129, 148, 148, 0.27);}
+.admin_login dd:before{font-family:'adminthemesregular';position:absolute;top:0;left:10px;height:42px;line-height:42px;font-size:20px;color:#0c9076;}
+.admin_login dd.user_icon:before{content:"U";}
+.admin_login dd.pwd_icon:before{content:"P";}
+.admin_login dd.sear_year:before{content:"Y";}
+.admin_login dd.sear_xueqi:before{content:"S";}
+.admin_login dd.sear_type:before{content:"T";}
+
+.admin_login dd.ver_btn{text-align:right;border:none;color:#f4f4f4;height:42px;line-height:42px;margin:0;z-index:1;position:relative;float:right;background:rgba(129, 148, 148, 0.97);}
+.admin_login dd .checkcode{float:left;width:182px;height:42px;background:background:rgba(129, 148, 148, 0.27);}
+.admin_login dd .checkcode input{width:120px;height:36px;line-height:36px;padding:3px;color:white;outline:none;border:none;text-indent:2.8em;}
+.admin_login dd .checkcode canvas{width:85px;height:36px;padding:3px;z-index:0;background:rgba(129, 148, 148, 0.27);}
+.admin_login dd .submit_btn{width:100%;height:42px;border:none;font-size:16px;background:rgb(69, 108, 118);color:#f8f8f8;}
+.admin_login dd .submit_btn:hover{background:rgb(59, 98, 108);color:#f4f4f4;}
+.admin_login dd p{color:#53c6b0;font-size:12px;text-align:center;margin:5px 0;}

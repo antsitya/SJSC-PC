@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="img/logo.ico" type="image/x-icon" />
+		<title>三江学院学生成绩查询</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" tppabs="css/style.css" />
+		<style>
+			html {
+				width: 100%;
+				height: 100%;
+			}
+			
+			body {
+				width: 100%;
+				height: 100%;
+				background-image: url(img/back.jpg);
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+			}
+			#score{
+				display: none;
+			}
+			.score{
+				width: 80%;
+				height: 100%;
+				margin: 0 auto;
+				background: rgba(255,255,255,0.3);
+			}
+			.top{
+				padding-top:10px;
+				width: 100%;
+				height: 100px;
+			}
+			#high{
+				display:none;
+				/*display:block ;*/
+			}
+			#common{
+				/*display:none;*/
+				display:block ;
+			}
+			#tab1,#tab2{
+				width: 950px;
+				height: 38px;
+				margin: 0px auto;
+				border: 1px solid;
+			}
+			#tab1{
+				border-bottom:none ;
+			}
+			#tab2{
+				border-top:none ;
+			}
+			.top tr{
+				height: 38px;
+			}
+			#t1>td{
+				width:155px;
+				height: 38px;
+			}
+			#t2>td{
+				width:235px;
+				height: 38px;
+			}
+			td{
+				border: 1px solid;
+				text-align: center;
+			}
+			.bottom::-webkit-scrollbar {
+	            width: 0px;
+	        }
+			.bottom{
+				width: 100%;
+				height: 500px;
+				overflow-y:scroll;
+				overflow-x:hidden;
+			}
+			#tab3{
+				width: 950px;
+				margin: 0 auto;
+			}
+			.titles{
+				height: 35px;
+			}
+			#avrscore{
+				font-style:initial;
+				color: red;
+			}
+			.div01{
+				width: 300px;
+				height: 42px;
+				background-color: rgba(129, 148, 148, 0.27);
+				overflow: hidden;
+				background: url("img/arrow.png") no-repeat scroll right center;
+			}
+			#year,#term,#type{
+				-webkit-appearance:none;
+			    -moz-appearance:none;
+			    appearance:none;
+			    background:rgba(129, 148, 148, 0.27);
+			    border:none;
+			    padding-left:40px;
+			    color: white;
+			    width: 300px;
+			    height:42px;
+			}
+			.div01 option{
+				background-color: transparent;
+			}
+			
+			
+			
+			
+		</style>
+		<script>
+			function search() {
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/cgi-bin/SJSC.py', true);
+				xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+				//				var str="user_num=12015052085&user_pw=1996.09.01";
+				var str = "user_num=" + document.getElementById("num").value + "&user_pw=" + document.getElementById("pw").value+"&year1="+''+"&type1="+"在校学习成绩查询"+"&term1="+'';
+				
+				
+				xhr.send(str);
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4 && xhr.status == 200) {
+						var text = xhr.responseText;
+//						alert(text);
+						var json = eval("(" + text + ")");
+//						alert(json.sums);
+						var status=json.statu;
+//						alert(typeof(status)+" "+typeof("登陆成功"));
+//						alert("1"+status+"1");
+//						status=" 登陆成功";
+						if(status==" 登陆成功 "){
+							document.getElementById("sear").style.display="none";
+							document.getElementById("score").style.display="block";
+							document.getElementById("name").innerHTML=json.name;
+							document.getElementById("xueyuan").innerHTML=json.xueyuan;
+							document.getElementById("zhuanye").innerHTML=json.zhuanye;
+							document.getElementById("banji").innerHTML=json.banji;
+							document.getElementById("avrscore").innerHTML=json.arvpoint;
+							len=json.sums;
+							var i=1;
+							for(i=1;i<len+1;i++){
+								contents=document.getElementById("tab3");
+								var d1=eval("json.s1"+i.toString());
+								var d2=eval("json.s2"+i.toString());
+								var d3=eval("json.s3"+i.toString());
+								var d4=eval("json.s4"+i.toString());
+								var d5=eval("json.s5"+i.toString());
+								var d6=eval("json.s6"+i.toString());
+								var d7=eval("json.s7"+i.toString());
+								var d8=eval("json.s8"+i.toString());
+								var d9=eval("json.s9"+i.toString());								
+								contents.innerHTML=contents.innerHTML+"<tr class='xueke'><td>"+d1+"</td><td>"+d2+"</td><td>"+d3+"</td><td>"+d4+"</td><td>"+d5+"</td><td>"+d6+"</td><td>"+d7+"</td><td>"+d8+"</td><td>"+d9+"</td></tr>";
+							}
+						}
+						if(status==" 登陆失败 "){
+							alert("学号或密码不正确！请重新输入！(学号和密码不能为空)");
+						}
+//						document.getElementById("artids").value=json.IDs;			
+					}
+				}
+			}
+			function hi(){
+				document.getElementById("common").style.display="none";
+				document.getElementById("high").style.display="block";
+				var date=new Date;
+				var year0=date.getFullYear();
+				var year1=year0+1;
+				var year2=year0-1;
+				var year3=year0-2;
+				var year4=year0-3;
+				var year5=year0-4;
+				var year6=year0-5;
+				var o1=year0.toString()+"-"+year1.toString();
+				var o2=year2.toString()+"-"+year0.toString();
+				var o3=year3.toString()+"-"+year2.toString();
+				var o4=year4.toString()+"-"+year3.toString();
+				var o5=year5.toString()+"-"+year4.toString();
+				var o6=year6.toString()+"-"+year5.toString();
+				document.getElementById("y1").innerHTML=o1;document.getElementById("y1").value=o1;
+				document.getElementById("y2").innerHTML=o2;document.getElementById("y2").value=o2;
+				document.getElementById("y3").innerHTML=o3;document.getElementById("y3").value=o3;
+				document.getElementById("y4").innerHTML=o4;document.getElementById("y4").value=o4;
+				document.getElementById("y5").innerHTML=o5;document.getElementById("y5").value=o5;
+				document.getElementById("y6").innerHTML=o6;document.getElementById("y6").value=o6;
+			}
+			function co(){
+				document.getElementById("common").style.display="block";
+				document.getElementById("high").style.display="none";
+			}
+			function searchplus() {
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/cgi-bin/SJSC.py', true);
+				xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+				//				var str="user_num=12015052085&user_pw=1996.09.01";
+				var index1=document.getElementById("year").selectedIndex;
+				var year1=document.getElementById("year").options[index1].value;
+				var index2=document.getElementById("term").selectedIndex;
+				var term1=document.getElementById("term").options[index2].value;
+				var index3=document.getElementById("type").selectedIndex;
+				var type1=document.getElementById("type").options[index3].value;
+				var str = "user_num=" + document.getElementById("nums").value + "&user_pw=" + document.getElementById("pws").value+"&year1="+year1+"&type1="+type1+"&term1="+term1;
+//				alert(str);
+				xhr.send(str);
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4 && xhr.status == 200) {
+						var text = xhr.responseText;
+						var json = eval("(" + text + ")");
+						var status=json.statu;
+						if(status==" 登陆成功 "){
+							document.getElementById("sear").style.display="none";
+							document.getElementById("score").style.display="block";
+							document.getElementById("name").innerHTML=json.name;
+							document.getElementById("xueyuan").innerHTML=json.xueyuan;
+							document.getElementById("zhuanye").innerHTML=json.zhuanye;
+							document.getElementById("banji").innerHTML=json.banji;
+							document.getElementById("avrscore").innerHTML=json.arvpoint;
+							len=json.sums;
+							var i=1;
+							for(i=1;i<len+1;i++){
+								contents=document.getElementById("tab3");
+								var d1=eval("json.s1"+i.toString());
+								var d2=eval("json.s2"+i.toString());
+								var d3=eval("json.s3"+i.toString());
+								var d4=eval("json.s4"+i.toString());
+								var d5=eval("json.s5"+i.toString());
+								var d6=eval("json.s6"+i.toString());
+								var d7=eval("json.s7"+i.toString());
+								var d8=eval("json.s8"+i.toString());
+								var d9=eval("json.s9"+i.toString());								
+								contents.innerHTML=contents.innerHTML+"<tr class='xueke'><td>"+d1+"</td><td>"+d2+"</td><td>"+d3+"</td><td>"+d4+"</td><td>"+d5+"</td><td>"+d6+"</td><td>"+d7+"</td><td>"+d8+"</td><td>"+d9+"</td></tr>";
+							}
+						}
+						if(status==" 登陆失败 "){
+							alert("学号或密码不正确！请重新输入！(学号和密码不能为空)");
+						}			
+					}
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<form method="post" action="" id="sear">
+			<dl class="admin_login" id="common">
+				<dt><strong>成绩查询系统</strong><em>Learning Performance Inquiry System</em></dt>
+				<dd class="user_icon">
+					<input type="text" placeholder="学号" id="num" name="num" class="login_txtbx" />
+				</dd>
+				<dd class="pwd_icon">
+					<input type="password" placeholder="密码" id="pw" name="pw" class="login_txtbx" />
+				</dd>
+				<dd>
+					<input type="button" value="立即查询" id="score_search" name="score_search" onclick="search()" class="submit_btn" />
+				</dd>
+				<dd>
+					<p>点这里：
+						<a href="javascript:hi();" target="_blank">高级查询</a>
+					</p>
+				</dd>
+			</dl>
+			<dl class="admin_login" id="high">
+				<dt><strong>成绩查询系统</strong><em>Learning Performance Inquiry System</em></dt>
+				<dd class="user_icon">
+					<input type="text" placeholder="学号" id="nums" name="num" class="login_txtbx" />
+				</dd>
+				<dd class="pwd_icon">
+					<input type="password" placeholder="密码" id="pws" name="pw" class="login_txtbx" />
+				</dd>
+				<dd class="sear_year">
+					<div class="div01">
+						<select id="year">
+							<option value="" selected="selected"></option>
+							<option id="y1"></option>
+							<option id="y2"></option>
+							<option id="y3"></option>
+							<option id="y4"></option>
+							<option id="y5"></option>
+							<option id="y6"></option>
+						</select>	
+					</div>
+				</dd>
+				<dd class="sear_xueqi">
+					<div class="div01">
+						<select id="term">
+							<option value="" selected="selected"></option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</select>	
+					</div>	
+				</dd>
+				<dd class="sear_type">
+					<div class="div01">
+						<select id="type">
+							<option value="按学期查询">按学期查询</option>
+							<option value="按学年查询">按学年查询</option>
+							<option value="在校学习成绩查询" selected="selected">在校学习成绩查询</option>
+						</select>	
+					</div>	
+				</dd>
+				<dd>
+					<input type="button" value="立即查询" id="score_search" name="score_search" onclick="searchplus()" class="submit_btn" />
+				</dd>
+				<dd>
+					<p>点这里：
+						<a href="javascript:co();" target="_blank">普通查询</a>
+					</p>
+				</dd>
+			</dl>
+		</form>
+		<div class="score" id="score">
+			<div class="top">
+				<table id="tab1">
+					<tr id="t1"><td><strong>姓名：</strong><span id="name"></span></td><td><strong>班级：</strong><span id="banji"></span></td><td><strong>平均绩点：</strong><span id="avrscore"></span></td></tr>
+				</table>
+				<table id="tab2">
+					<tr id="t2"><td><strong>学院：</strong><span id="xueyuan"></span></td><td><strong>专业：</strong><span id="zhuanye"></span></td></tr>
+				</table>
+			</div>
+			<div class="bottom">
+				<table id="tab3" border="" cellspacing="" cellpadding="">
+					<tr class="titles"><th>课程名称</th><th>课程性质</th><th>期末成绩</th><th>最终成绩</th><th>课程归属</th><th>补考成绩</th><th>重修成绩</th><th>学分</th><th>辅修标记</th></tr>
+				</table>
+				
+			</div>
+			
+		</div>
+	</body>
+
+</html>
